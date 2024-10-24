@@ -4,6 +4,7 @@ import org.example.productservice.models.Product;
 import org.example.productservice.repositories.projections.ProductProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -26,5 +27,8 @@ void deleteById(Long productId);
 
 Product findByIdIs(Long productId);
 List<Product> findByCategoryTitle(String category);
+
+ @Query("SELECT p FROM Product p JOIN p.category c WHERE c.title = :categoryName")
+ List<Product> getProductsByCategory(@Param("categoryName") String categoryName);
 
 }

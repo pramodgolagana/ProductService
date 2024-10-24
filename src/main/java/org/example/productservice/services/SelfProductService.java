@@ -73,18 +73,21 @@ public class SelfProductService implements ProductService{
             product.setPrice(requestDto.getPrice());
         }
 
-        Category newcategory;
 
-        if(categoryRepository.existsByTitle(requestDto.getCategory()) ){
-            newcategory = categoryRepository.findByTitle(requestDto.getCategory());
-        }
-        else{
+        if(requestDto.getCategory()!=null){
+            Category newcategory;
 
-            Category categoryToSave= new Category();
-            categoryToSave.setTitle(requestDto.getCategory());
-            newcategory = categoryRepository.save(categoryToSave);
+            if(categoryRepository.existsByTitle(requestDto.getCategory()) ){
+                newcategory = categoryRepository.findByTitle(requestDto.getCategory());
+            }
+            else{
+
+                Category categoryToSave= new Category();
+                categoryToSave.setTitle(requestDto.getCategory());
+                newcategory = categoryRepository.save(categoryToSave);
+            }
+            product.setCategory(newcategory);
         }
-        product.setCategory(newcategory);
 
         return productRepository.save(product);
     }
