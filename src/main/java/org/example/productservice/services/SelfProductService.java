@@ -8,6 +8,9 @@ import org.example.productservice.models.Product;
 import org.example.productservice.repositories.CategoryRepository;
 import org.example.productservice.repositories.ProductRepository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -102,6 +105,21 @@ public class SelfProductService implements ProductService{
     @Override
     public List<Category> getALLCategorys() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public Page<Product> getPagebelProducts(int pageNumber, int pageSize, String sorting) {
+        return switch (sorting) {
+            case "id-asc" ->   productRepository.findAll(
+                    PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "id")
+            );
+            case "name-desc" -> productRepository.findAll(
+                    PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "title")
+            );
+            default -> productRepository.findAll(
+                    PageRequest.of(pageNumber, pageSize)
+            );
+        };
     }
 
     @Override

@@ -9,6 +9,7 @@ import org.example.productservice.models.Category;
 import org.example.productservice.models.Product;
 import org.example.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -65,6 +66,17 @@ public class ProductController {
     @GetMapping("/products/categories")
     public List<Category> getAllCategories(){
         return productService.getALLCategorys();
+    }
+
+    @GetMapping("/products/pageable")
+    public Page<Product> getPagebelProducts(
+                        @RequestParam(value = "q", required = false) String query,
+                        @RequestParam(value = "pageNumber") int pageNumber,
+                        @RequestParam(value = "pageSize") int pageSize,
+                        @RequestParam(value = "s", required = false, defaultValue = "id-asc") String sorting){
+
+        return  productService.getPagebelProducts(pageNumber,pageSize,sorting);
+
     }
 
 }

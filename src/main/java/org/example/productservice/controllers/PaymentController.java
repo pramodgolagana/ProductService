@@ -6,17 +6,14 @@ import org.example.productservice.dto.PaymentResponseDto;
 import org.example.productservice.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/payment")
 public class PaymentController {
    //@Autowired
    private PaymentService paymentService;
-   public void PaymentController( @Qualifier("razorpay")PaymentService paymentService){
+   public  PaymentController( @Qualifier("razorpay")PaymentService paymentService){
        this.paymentService= paymentService;
    }
 
@@ -28,5 +25,6 @@ public class PaymentController {
        return "Success";
 
     }
+
 
 }

@@ -5,6 +5,7 @@ import org.example.productservice.dto.UpdateRequestDto;
 import org.example.productservice.exception.ProductNotFoundException;
 import org.example.productservice.models.Category;
 import org.example.productservice.models.Product;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -83,6 +84,11 @@ public class FakeStoreProductService implements ProductService{
             categories.add(category1);
         }
         return  categories;
+    }
+
+    @Override
+    public Page<Product> getPagebelProducts(int pageNumber, int pageSize, String sorting) {
+        return null;
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.example.productservice.dto.UpdateRequestDto;
 import org.example.productservice.exception.ProductNotFoundException;
 import org.example.productservice.models.Category;
 import org.example.productservice.models.Product;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public interface ProductService {
     Product updateProduct(UpdateRequestDto requestDto,Long id);
     List<Product> getProductsInCategory(String category);
     List<Category> getALLCategorys();
+    Page<Product> getPagebelProducts(int pageNumber, int pageSize,String sorting);
 
     Product createProduct(String title,
                           String description,

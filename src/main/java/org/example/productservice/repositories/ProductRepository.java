@@ -2,6 +2,8 @@ package org.example.productservice.repositories;
 
 import org.example.productservice.models.Product;
 import org.example.productservice.repositories.projections.ProductProjection;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -30,5 +32,8 @@ List<Product> findByCategoryTitle(String category);
 
  @Query("SELECT p FROM Product p JOIN p.category c WHERE c.title = :categoryName")
  List<Product> getProductsByCategory(@Param("categoryName") String categoryName);
+
+
+ Page<Product> findAll(Pageable pageable);
 
 }
