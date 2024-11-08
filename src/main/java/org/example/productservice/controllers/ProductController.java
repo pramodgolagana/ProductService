@@ -21,7 +21,7 @@ import java.util.NoSuchElementException;
 public class ProductController {
     ProductService productService;
 
-    ProductController(@Qualifier("SelfProductService") ProductService productService){
+    ProductController(@Qualifier("FakeStoreProductService") ProductService productService){
         this.productService= productService;
     }
 
