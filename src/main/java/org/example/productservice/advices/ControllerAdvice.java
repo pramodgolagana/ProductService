@@ -20,7 +20,7 @@ public class ControllerAdvice {
     }
 
     @ExceptionHandler(RunTimeException.class)
-    public  ResponseEntity<ErrorDto> cusstomRuntimeExceptionHandler(RunTimeException runTimeException){
+    public  ResponseEntity<ErrorDto> handelRuntimeExceptionHandler(RunTimeException runTimeException){
         ErrorDto errorDto = new ErrorDto();
         errorDto.setMessage(runTimeException.getMessage());
         ResponseEntity<ErrorDto> response = new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -28,7 +28,7 @@ public class ControllerAdvice {
 
     }
     @ExceptionHandler(NoSuchElementException.class)
-    public  ResponseEntity<ErrorDto> customNoSuchElementFound(NoSuchElementException noSuchElementException){
+    public  ResponseEntity<ErrorDto> handelNoSuchElementFound(NoSuchElementException noSuchElementException){
         ErrorDto errorDto = new ErrorDto();
         errorDto.setMessage(noSuchElementException.getMessage());
         ResponseEntity<ErrorDto> response = new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
