@@ -2,6 +2,7 @@ package org.example.productservice.services;
 
 
 import com.razorpay.Order;
+import com.razorpay.PaymentLink;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 import org.json.JSONObject;
@@ -17,28 +18,32 @@ public class RazorpayPaymentService implements PaymentService{
     }
 
     @Override
-    public void doPayment(String email, String phone, Double amount, String orderId) throws RazorpayException {
+    public String doPayment(String email, String phone, long amount, long orderId) throws RazorpayException {
 
-        JSONObject orderRequest = new JSONObject();
-        orderRequest.put("amount",amount);
-        orderRequest.put("currency","INR");
-        orderRequest.put("receipt", "receipt#1");
-
+        JSONObject paymentLinkRequest = new JSONObject();
+        paymentLinkRequest.put("amount",amount);
+        paymentLinkRequest.put("currency","INR");
+        paymentLinkRequest.put("expire_by", 1707194575);
+        paymentLinkRequest.put("reference_id","RP123434");
+        paymentLinkRequest.put("description","Payment for policy no #23456");
         JSONObject customer = new JSONObject();
-        customer.put("email", email);
-        customer.put("phone", phone);
-        orderRequest.put("notes",customer);
-
+        customer.put("name", "Pramod Golagana");
+        customer.put("contact",phone);
+        customer.put("email","pramod.golagana@scaler.com");
+        paymentLinkRequest.put("customer",customer);
         JSONObject notify = new JSONObject();
-        notify.put("sms", true);
-        notify.put("email", true);
-        orderRequest.put("notify", notify);
+        notify.put("sms",true);
+        notify.put("email",true);
+        paymentLinkRequest.put("notify",notify);
+        paymentLinkRequest.put("reminder_enable",true);
+        JSONObject notes = new JSONObject();
+        notes.put("policy_name","Jeevan Bima");
+        paymentLinkRequest.put("notes",notes);
+        paymentLinkRequest.put("callback_url","https://youtu.be/LcECVLfI43E?si=Ut6H6Lykwkx83Wqa");
+        paymentLinkRequest.put("callback_method","get");
 
-        orderRequest.put("callback_url", "https://domain.com/razorpayWebHook");
-        orderRequest.put("callback_method", "post");
+        PaymentLink payment = razorpayClient.paymentLink.create(paymentLinkRequest);
 
-        Order order = razorpayClient.orders.create(orderRequest);
-
-
+        return payment.toString();
     }
 }

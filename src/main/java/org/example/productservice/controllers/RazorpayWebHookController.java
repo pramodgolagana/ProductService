@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class RazorpayWebHookController {
 
     @PostMapping("/")
-    public ResponseEntity acceptWebHookRequest(){
-        // redirect to UI
-        System.out.println("Call back URL is called.");
-        return null;
+    public void acceptWebHookRequest(){
+
+        System.out.println("Razorpay WebHook triggered");
+        //Make all the actions requred after payment once the method is called.
+        return ;
     }
 }

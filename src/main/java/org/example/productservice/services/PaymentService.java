@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface PaymentService {
-    void doPayment(String email, String phone, Double amount, String orderId) throws Exception;
+    String doPayment(String email, String phone, long amount, long orderId) throws Exception;
 }

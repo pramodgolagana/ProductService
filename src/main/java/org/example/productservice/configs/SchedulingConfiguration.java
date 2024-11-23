@@ -8,5 +8,5 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @EnableScheduling
 @ConditionalOnProperty(name = "scheduling.enabled",matchIfMissing = true)
-public class SchedulingConigs {
+public class SchedulingConfiguration {
 }

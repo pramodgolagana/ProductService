@@ -14,7 +14,7 @@ public class CronJobController {
         this.emailSender=emailSender;
     }
     private String subject = "Friendly Reminder: Your Cart is Waiting for You!";
-    private String recipient ="padalapraneeth39@gmail.com";
+    private String recipient ="pramod.golagana97@gmail.com";
     private String body="Hi  Praneeth Padala,\n" +
             "\n" +
             "We noticed you have some items waiting in your cart! Just a quick reminder to check them out and make sure you don’t miss out on your favorite picks.\n" +
@@ -26,7 +26,7 @@ public class CronJobController {
             "Best regards,\n" +
             "The [Pramod Ecomerse] Team";
 
-    @Scheduled(initialDelay = 3000L,fixedRate = 2000L)
+    @Scheduled(initialDelay = 30000000000L,fixedRate = 20000L)
     void reminderFortheCartItems(){
 
         emailSender.sendEmail(recipient,subject,body);
